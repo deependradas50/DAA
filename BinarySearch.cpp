@@ -20,12 +20,24 @@ int binarySearch(vector<int>arr, int target){
     return 0;
 }
 int main(){
-    vector<int> arr = {3,5,7,9,12,13,14,45,67,77};
-    int target = 3;
+     int n ;
+    vector<int> arr;
+    cout<<"enter the no of element in the array"<<endl;
+    cin>>n;
+    for(int i = 0;i<n ;i++){
+        int value;
+        cout<<"enter the value"<<endl;
+        cin>>value;
+        arr.push_back(value);
+    }
+    int target ;
+    cout<<"enter the target element"<<endl;
+    cin>>target;
     if(target == binarySearch(arr,target)){
-        cout<<"the target is present in the vector";
+        cout<<"the target is present in the array";
     }
     else{
-        cout<<"the target is not present in the vector";
+        cout<<"the target is not present in the array";
     }
+    return 0;
 }
