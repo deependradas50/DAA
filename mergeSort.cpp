@@ -1,27 +1,54 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-void mergeSort(vector<int>&arr,int low,int high){
-    int mid = (low + high)/2;
-    mergeSort(arr,low,mid-1);
-    mergeSort(arr, mid+1,high);
-    merge(arr,low,mid,high);
-}
-void merge(vector<int>&arr,int low ,int mid, int high){
-    int n = arr.size();
-    vector<int>temp[n];
-    int l = mid - 1;
+
+void merge(vector<int>& arr, int low, int mid, int high) {
+    vector<int> temp;
+    int l = low;
     int r = mid + 1;
-    while(low<r){
+
+    while (l <= mid && r <= high) {
+        if (arr[l] <= arr[r]) {
+            temp.push_back(arr[l]);
+            l++;
+        } else {
+            temp.push_back(arr[r]);
+            r++;
+        }
+    }
+
+    while (l <= mid) {
+        temp.push_back(arr[l]);
+        l++;
+    }
+
+    while (r <= high) {
+        temp.push_back(arr[r]);
+        r++;
+    }
+
+    for (int i = 0; i < temp.size(); i++) {
+        arr[low + i] = temp[i];
     }
 }
-int main(){
-    vector<int>arr = {2,3,5,1,55,34,12,14,34,87};
-    int n = arr.size();
-    int low = 0;
-    int high = n-1;
-    mergeSort(arr,low,high);
-    cout<<"the sorted array is "<<endl;
-    for(auto it : arr){
-        cout<<it<<" ";
+
+void mergeSort(vector<int>& arr, int low, int high) {
+    if (low < high) {
+        int mid = low + (high - low) / 2;
+        mergeSort(arr, low, mid);
+        mergeSort(arr, mid + 1, high);
+        merge(arr, low, mid, high);
     }
+}
+
+int main() {
+    int n;
+    cout<<"enter the size of the array"<<endl;
+    cin >> n;
+    vector<int> arr(n);
+    cout<<"enter the element of the array"<<endl;
+    for (int i = 0; i < n; i++) cin >> arr[i];
+    mergeSort(arr, 0, n - 1);
+    cout<<"The sorted array is "<<endl;
+    for (int x : arr) cout << x << " ";
+    return 0;
 }
